@@ -1,0 +1,21 @@
+<!-- Case Study Section -->
+<section class="wrapper-column" id="case_studys">
+    <div class="wrapper-content">
+        <h2 class="content-title">Case Studies</h2>
+        <p class="content-text">
+            We offer extensive medical procedures to outbound and inbound
+            patients.
+        </p>
+        <div class="case-study-cards">
+            {% for c in case_studies %}
+            <div class="case-card">
+                <img class="card-img" src="{{ c.image.url }}" alt="">
+                <div class="case-card-content">
+                    <h3>{{ c.title }}</h3>
+                    <p>{{ c.description|truncatechars:160 }}</p>
+                    <a href="{{ c.button_url }}" class="read-more-btn">{{ c.button_text }}</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+</section>

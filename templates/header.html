@@ -1,0 +1,42 @@
+{% load static %}
+
+<!-- Header -->
+  <header class="header" id="header">
+    <nav class="navbar">
+      <a href="#home" class="brand">Hospital Founder</a>
+
+      <div class="menu-block">
+        <div class="menu" id="menu">
+          <ul class="menu-inner">
+            <li class="menu-item">
+              <a href="#home" class="menu-link">Home</a>
+            </li>
+            <li class="menu-item">
+              <a href="#about" class="menu-link">About</a>
+            </li>
+            <li class="menu-item">
+              <div class="dropdown">
+                <a class="menu-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Departments
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <li><a class="dropdown-item" href="#">Cardiology</a></li>
+                  <li><a class="dropdown-item" href="#">Neurology</a></li>
+                  <li><a class="dropdown-item" href="#">Pediatrics</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="menu-item">
+              <a href="#contact" class="menu-link">Contact</a>
+            </li>
+          </ul>
+        </div>
+        <button type="button" class="btn btn-darken">Register</button>
+        <button type="button" class="burger" id="burger">
+          <span class="burger-line"></span>
+          <span class="burger-line"></span>
+        </button>
+      </div>
+    </nav>
+  </header>

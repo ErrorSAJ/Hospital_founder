@@ -1,0 +1,29 @@
+<!-- Medical Specialists Section  -->
+<section class="wrapper-column" id="Docters-profile">
+    <div class="wrapper-content">
+        <h2 class="content-title">Our Medical Specialists</h2>
+        <p class="content-text">
+            We offer extensive medical procedures to outbound and inbound
+            patients.
+        </p>
+        <div class="doctor-profile-cards">
+            {% for d in doctors %}
+            <div class="profile-card">
+                <img class="doctor-img" src="{{ d.image.url }}">
+                <div class="overlay-content">
+                    <h3>{{ d.name }}</h3>
+                    <div class="specialization">{{ d.specialization }}</div>
+                    <p class="qualifications">{{ d.qualifications }}</p>
+                    <div class="stats">
+                        <div class="stat-item"><span class="stat-value">{{ d.experience_years
+                                }}+</span><span>Years</span></div>
+                        <div class="stat-item"><span class="stat-value">{{ d.total_patients
+                                }}+</span><span>Patients</span></div>
+                        <div class="stat-item"><span class="stat-value">{{ d.rating }}</span><span>Rating</span></div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

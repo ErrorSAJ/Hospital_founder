@@ -1,0 +1,22 @@
+{% load static %}
+
+<!-- Full Page Slider -->
+<div class="fullpage-slider" id="home">
+    {% if banners %}
+    {% for banner in banners %}
+    <div class="slide">
+        <img src="{{banner.img.url}}" alt="{{banner.img.url}}" style="width: 100%; object-fit: cover;">
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="slide">
+        <img src="{% static 'img/hos.jpg' %}" alt="" style="width: 100%; object-fit: cover;">
+    </div>
+    <div class="slide">
+        <img src="{% static 'img/hos.jpg' %}" alt="" style="width: 100%; object-fit: cover;">
+    </div>
+    <div class="slide">
+        <img src="{% static 'img/hos.jpg' %}" alt="" style="width: 100%; object-fit: cover;">
+    </div>
+    {% endif %}
+</div>
