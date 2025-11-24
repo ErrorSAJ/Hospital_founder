@@ -94,7 +94,7 @@ class Testimonial(models.Model):
         return self.name
 
 # ------------------------
-# 4. Banners SECTION
+# 5. Banners SECTION
 # ------------------------
 
 class Banners(models.Model):
@@ -108,7 +108,7 @@ class Banners(models.Model):
         return self.name if self.name else "unknown"
     
 # ------------------------
-# 4. Contact SECTION
+# 6. Contact SECTION
 # ------------------------
 
 class ContactRequest(models.Model):
