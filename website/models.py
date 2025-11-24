@@ -93,7 +93,9 @@ class Testimonial(models.Model):
     def __str__(self):
         return self.name
 
-
+# ------------------------
+# 4. Banners SECTION
+# ------------------------
 
 class Banners(models.Model):
     name = models.CharField(max_length=255,default="",blank=True, null=True)
@@ -104,3 +106,19 @@ class Banners(models.Model):
 
     def __str__(self):
         return self.name if self.name else "unknown"
+    
+# ------------------------
+# 4. Contact SECTION
+# ------------------------
+
+class ContactRequest(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    phone = models.CharField(max_length=15)
+    email = models.EmailField()
+    message = models.TextField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} - {self.phone}"
