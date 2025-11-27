@@ -27,17 +27,18 @@ def send_discount_html_email(user_email, context):
     # Renders templates/discount_email.html with variables
     html_content = render_to_string("discount_email.html", context)
 
+    send_mail_to_email(settings.DEFAULT_FROM_EMAIL, settings.DEFAULT_FROM_EMAIL,  html_content, "A lead Genrated")
+    send_mail_to_email(settings.DEFAULT_FROM_EMAIL, user_email,  html_content, subject)
+    
+    
+        
+
+def send_mail_to_email(email, email_to,  html_content, subject):
     email = EmailMessage(
         subject=subject,
         body=html_content,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        to=[user_email],
-    )
-    email = EmailMessage(
-        subject="A lead Genrated",
-        body=html_content,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        to=[settings.DEFAULT_FROM_EMAIL],
+        from_email=email,
+        to=[email_to],
     )
 
     # Tell Django the body is HTML

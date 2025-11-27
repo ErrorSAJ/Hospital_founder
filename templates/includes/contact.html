@@ -16,7 +16,8 @@
               </p>
             </div>
 
-            <form id="hospitalContactForm" novalidate>
+            <form id="hospitalContactForm" action="/" method="post">
+              {% csrf_token %}
               <div class="contact-form-row">
                 <div class="contact-form-group">
                   <label for="patientFirstName" class="contact-form-label">

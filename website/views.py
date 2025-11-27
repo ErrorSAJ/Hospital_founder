@@ -52,7 +52,6 @@ def handle_form(request):
             "hospital_address": "Your City, India",
         }
         try:
-            print("Sending email to user...")
             send_discount_html_email(context["patient_email"], context)
         except Exception as e:
             print(f"Error sending email: {e}")
