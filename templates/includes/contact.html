@@ -14,7 +14,8 @@
               </p>
             </div>
 
-            <form id="hospitalContactForm" novalidate>
+            <form id="hospitalContactForm" action="/" method="post">
+              {% csrf_token %}
               <div class="contact-form-row">
                 <div class="contact-form-group">
                   <label for="patientFirstName" class="contact-form-label">
@@ -98,7 +99,7 @@
 
           <div class="contact-info-content">
             <div class="contact-company-logo">
-              <i class="fas fa-hospital"></i> Hospital Founder
+              <i class="fas fa-hospital"></i> Health Secure Plus
             </div>
 
             <h2 class="contact-info-title">Your Health is Our Priority</h2>
@@ -111,12 +112,7 @@
             <div class="contact-info-items">
               <div class="contact-info-item">
                 <i class="fas fa-envelope"></i>
-                <span>info@hospitalfounder.com</span>
-              </div>
-
-              <div class="contact-info-item">
-                <i class="fas fa-phone"></i>
-                <span>+91 8448498161</span>
+                <span>healthsecurepluss@gmail.com</span>
               </div>
 
               <div class="contact-info-item">
