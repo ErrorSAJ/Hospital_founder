@@ -16,6 +16,7 @@ def index(request):
 
 
     context = {
+        "banners": Banners.objects.filter(is_active=True),
         "services": Service.objects.filter(is_active=True),
         "case_studies": CaseStudy.objects.filter(is_active=True),
         "doctors": Doctor.objects.filter(is_active=True),
