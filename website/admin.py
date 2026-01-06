@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Service, CaseStudy, Doctor, Testimonial, Banners, ContactRequest
+from .models import *
 
 prepopulated_fields = {'slug': ('name',)}
 
@@ -34,4 +34,10 @@ class TestimonialAdmin(admin.ModelAdmin):
 class TestimonialAdmin(admin.ModelAdmin):
     list_display = ('first_name','last_name','phone' ,'email')
     search_fields = ('first_name','last_name','phone' ,'email')
+    
+    
+@admin.register(ClientHospitals)
+class ClientHospitalsAdmin(admin.ModelAdmin):
+    list_display = ('name','created_at','is_active')
+    search_fields = ('name','is_active')
     
