@@ -57,28 +57,17 @@
 
 <script>
   const testimonials = [
+    {% for t in testimonials %}
     {
-      quote:
-        "I was impressed by the food — every dish is bursting with flavor! And I could really tell that they use high-quality ingredients. The staff was friendly and attentive, going the extra mile. I'll definitely be back for more!",
-      name: "Tamar Mendelson",
-      designation: "Restaurant Critic",
-      src: "https://images.unsplash.com/photo-1512316609839-ce289d3eba0a?q=80&w=1368&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      quote: "{{ t.quote|escapejs }}",
+      name: "{{ t.name|escapejs }}",
+      designation: "{{ t.designation|escapejs }}",
+      src: "{% if t.profile_pic %}{{ t.profile_pic.url }}{% else %}/static/images/default-avatar.jpg{% endif %}",
     },
-    {
-      quote:
-        "This place exceeded all expectations! The atmosphere is inviting, and the staff truly goes above and beyond to ensure a fantastic visit. I'll definitely keep returning for more exceptional dining experience.",
-      name: "Joe Charlescraft",
-      designation: "Frequent Visitor",
-      src: "https://images.unsplash.com/photo-1628749528992-f5702133b686?q=80&w=1368&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D",
-    },
-    {
-      quote:
-        "Shining Yam is a hidden gem! From the moment I walked in, I knew I was in for a treat. The impeccable service and overall attention to detail created a memorable experience. I highly recommend it!",
-      name: "Martina Edelweist",
-      designation: "Satisfied Customer",
-      src: "https://images.unsplash.com/photo-1524267213992-b76e8577d046?q=80&w=1368&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D",
-    },
+    {% endfor %}
   ];
+  
+
 
   let activeIndex = 0;
   const imageContainer = document.getElementById("image-container");
