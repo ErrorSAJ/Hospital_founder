@@ -43,24 +43,24 @@
   {% endif %}
 </div>
 
-<div class="fullscreen-pop-up">
-  <div class="pop-up-box">
-    <div class="clos-pop-up" onclick="closePopUp()">
+<div class="popup-overlay">
+  <div class="popup-modal">
+    <div class="popup-close-btn" onclick="closePopUp()">
       <i class="fa fa-times" aria-hidden="true"></i>
     </div>
 
     <!-- Top Discount Strip with Text Marquee -->
-    <div class="discount-strip top-strip">
-      <div class="strip-content">
-        <div class="marquee-container">
-          <div class="marquee">
-            <span class="marquee-text"
+    <div class="popup-discount-strip popup-top-strip">
+      <div class="popup-strip-content">
+        <div class="popup-marquee-container">
+          <div class="popup-marquee">
+            <span class="popup-marquee-text"
               >Special Discount Available – Save More on Every Visit!</span
             >
-            <span class="marquee-text"
+            <span class="popup-marquee-text"
               >Special Discount Available – Save More on Every Visit!</span
             >
-            <span class="marquee-text"
+            <span class="popup-marquee-text"
               >Special Discount Available – Save More on Every Visit!</span
             >
           </div>
@@ -68,25 +68,105 @@
       </div>
     </div>
 
-    <!-- Main Card Content -->
-    <div class="card-content">
-      <img
-        src="https://img.freepik.com/free-vector/people-walking-sitting-hospital-building-city-clinic-glass-exterior-flat-vector-illustration-medical-help-emergency-architecture-healthcare-concept_74855-10130.jpg?semt=ais_hybrid&w=740&q=80"
-        alt=""
-      />
+    <!-- Popup Form Section -->
+    <div class="popup-form-wrapper">
+      <div class="popup-form-content">
+        <div class="popup-header">
+          <h1 class="popup-title">Get In Touch</h1>
+          <p class="popup-subtitle">
+            Have a question or need assistance? We're here to help you.
+          </p>
+        </div>
+
+        <form id="popupHospitalForm" action="/" method="post">
+          {% csrf_token %}
+          <div class="popup-form-grid">
+            <div class="popup-field-group">
+              <label for="popupFormFirstName" class="popup-field-label">
+                <i class="fas fa-user"></i> First Name
+              </label>
+              <input
+                type="text"
+                id="popupFormFirstName"
+                name="first_name"
+                class="popup-field-input"
+                required
+              />
+              <div class="popup-field-error"></div>
+            </div>
+            <div class="popup-field-group">
+              <label for="popupFormLastName" class="popup-field-label">
+                <i class="fas fa-user"></i> Last Name
+              </label>
+              <input
+                type="text"
+                id="popupFormLastName"
+                name="last_name"
+                class="popup-field-input"
+                required
+              />
+              <div class="popup-field-error"></div>
+            </div>
+          </div>
+          <div class="popup-form-grid">
+            <div class="popup-field-group">
+              <label for="popupFormEmail" class="popup-field-label">
+                <i class="fas fa-envelope"></i> Email Address
+              </label>
+              <input
+                type="email"
+                id="popupFormEmail"
+                name="email"
+                class="popup-field-input"
+                required
+              />
+              <div class="popup-field-error"></div>
+            </div>
+
+            <div class="popup-field-group">
+              <label for="popupFormPhone" class="popup-field-label">
+                <i class="fas fa-phone"></i> Phone Number
+              </label>
+              <input
+                type="tel"
+                id="popupFormPhone"
+                name="phone"
+                class="popup-field-input"
+              />
+            </div>
+          </div>
+
+          <div class="popup-field-group">
+            <label for="popupFormMessage" class="popup-field-label">
+              <i class="fas fa-message"></i> Message
+            </label>
+            <textarea
+              id="popupFormMessage"
+              name="message"
+              class="popup-field-textarea"
+              required
+            ></textarea>
+            <div class="popup-field-error"></div>
+          </div>
+
+          <button type="submit" class="popup-action-btn">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+        </form>
+      </div>
     </div>
 
-    <div class="discount-strip bottom-strip">
-      <div class="strip-content">
-        <div class="marquee-container">
-          <div class="marquee reverse">
-            <span class="marquee-text"
+    <div class="popup-discount-strip popup-bottom-strip">
+      <div class="popup-strip-content">
+        <div class="popup-marquee-container">
+          <div class="popup-marquee popup-marquee-reverse">
+            <span class="popup-marquee-text"
               >विशेष छूट उपलब्ध — हर विज़िट पर और बचत करें!</span
             >
-            <span class="marquee-text"
+            <span class="popup-marquee-text"
               >विशेष छूट उपलब्ध — हर विज़िट पर और बचत करें!</span
             >
-            <span class="marquee-text"
+            <span class="popup-marquee-text"
               >विशेष छूट उपलब्ध — हर विज़िट पर और बचत करें!</span
             >
           </div>
@@ -98,12 +178,12 @@
 
 <script>
   window.onload = () => {
-    document.querySelector(".fullscreen-pop-up").style.display = "block";
+    document.querySelector(".popup-overlay").style.display = "block";
     document.body.style.overflow = "hidden";
   };
 
   const closePopUp = () => {
-    document.querySelector(".fullscreen-pop-up").style.display = "none";
+    document.querySelector(".popup-overlay").style.display = "none";
     document.body.style.overflow = "auto";
   };
 </script>

@@ -1634,34 +1634,34 @@ ul {
 }
 
 /* FULLSCREEN POPUP STYLES */
-.fullscreen-pop-up {
-  height: 100vh;
-  width: 100vw;
+.popup-overlay {
+  height: 100dvh;
+  width: 100dvw;
   overflow: hidden;
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.535);
   display: none;
-  z-index: 1000;
+  z-index: 9999;
   backdrop-filter: blur(5px);
 }
 
-.pop-up-box {
+.popup-modal {
   height: 500px;
   width: 700px;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0);
+  transform: translate(-50%, -50%);
   border-radius: 15px;
   background: #ffffff;
   box-shadow: 0px 10px 30px rgba(102, 126, 234, 0.3);
-  animation: popOut 0.5s ease-out forwards;
+  animation: popupModalShow 0.5s ease-out forwards;
   overflow: hidden;
+  z-index: 10000;
 }
-
-@keyframes popOut {
+@keyframes popupModalShow {
   0% {
     transform: translate(-50%, -50%) scale(0);
     opacity: 0;
@@ -1675,8 +1675,22 @@ ul {
     opacity: 1;
   }
 }
+.popup-overlay.closing .popup-modal {
+  animation: popupModalHide 0.3s ease-in forwards;
+}
 
-.pop-up-box .clos-pop-up {
+@keyframes popupModalHide {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+}
+
+.popup-close-btn {
   padding: 10px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.95);
@@ -1694,14 +1708,15 @@ ul {
   transition: all 0.3s ease;
   font-size: 18px;
 }
-.pop-up-box .clos-pop-up:hover {
+
+.popup-close-btn:hover {
   background: #fff;
   transform: scale(1.1);
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
-.discount-strip {
-  background: linear-gradient(90deg, #ec3f1c 0%, #f3ff0c 100%);
-  /* padding: 8px 20px; */
+
+.popup-discount-strip {
+  background: linear-gradient(90deg, #5190cd 0%, #fdfdfd 100%);
   color: white;
   font-weight: bold;
   position: relative;
@@ -1711,15 +1726,15 @@ ul {
   align-items: center;
 }
 
-.top-strip {
+.popup-top-strip {
   border-bottom: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-.bottom-strip {
+.popup-bottom-strip {
   border-top: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-.strip-content {
+.popup-strip-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1727,46 +1742,53 @@ ul {
   width: 100%;
 }
 
-.discount-text {
-  font-size: 14px;
-  font-weight: 700;
-  white-space: nowrap;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  flex-shrink: 0;
-}
-
-/* Image Marquee Styles */
-.marquee-container {
+.popup-marquee-container {
   flex: 1;
   overflow: hidden;
   position: relative;
   height: 40px;
 }
 
-.marquee {
+.popup-marquee {
   display: flex;
-  animation: marqueeScroll 10s linear infinite;
+  animation: popupMarqueeScroll 10s linear infinite;
   white-space: nowrap;
   height: 100%;
   align-items: center;
   gap: 3rem;
 }
 
-.marquee.reverse {
-  animation: marqueeScrollReverse 10s linear infinite;
+.popup-marquee-reverse {
+  animation: popupMarqueeScrollReverse 10s linear infinite;
 }
 
-.marquee-text {
+.popup-marquee-text {
   flex-shrink: 0;
   font-size: 15px;
   font-weight: 600;
-  color: white;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
   letter-spacing: 0.5px;
   padding: 0 2rem;
+  background: linear-gradient(
+    to right,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: bold;
+  display: inline-block;
+  background-size: 200% auto;
+  animation: popupRainbowAnimation 0.5s ease-in-out infinite;
 }
 
-@keyframes marqueeScroll {
+@keyframes popupMarqueeScroll {
   0% {
     transform: translateX(0);
   }
@@ -1775,7 +1797,7 @@ ul {
   }
 }
 
-@keyframes marqueeScrollReverse {
+@keyframes popupMarqueeScrollReverse {
   0% {
     transform: translateX(-50%);
   }
@@ -1784,21 +1806,198 @@ ul {
   }
 }
 
-/* Main Card Content */
-.card-content {
+@keyframes popupRainbowAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.popup-form-wrapper {
   height: calc(100% - 100px);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ffffff;
-  padding: 0;
+  overflow-y: hidden;
 }
 
-.card-content img {
+.popup-form-content {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  padding: 1rem 4rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  overflow: auto;
+  animation: popupContentSlideIn 0.6s ease-out forwards;
+}
+
+@keyframes popupContentSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.popup-header {
+  text-align: center;
+}
+
+.popup-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a202c;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.popup-subtitle {
+  color: #64748b;
+  font-size: 0.8rem;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.popup-field-group {
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.popup-field-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #4b5563;
+  /* margin-bottom: 8px; */
+  transition: color 0.3s ease;
+}
+
+.popup-field-label i {
+  color: #667eea;
+  font-size: 0.8rem;
+}
+
+.popup-field-input {
+  width: 100%;
   padding: 10px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: #ffffff;
+  transition: all 0.3s ease;
+  outline: none;
+  color: #1f2937;
+}
+
+.popup-field-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: #ffffff;
+  transition: all 0.3s ease;
+  outline: none;
+  color: #1f2937;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.popup-field-input:focus,
+.popup-field-textarea:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: translateY(-1px);
+}
+
+.popup-field-input:hover,
+.popup-field-textarea:hover {
+  border-color: #c7d2fe;
+}
+
+.popup-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.popup-action-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #5568d3 50%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.popup-action-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+}
+
+.popup-action-btn:active {
+  transform: translateY(-1px);
+}
+
+.popup-action-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.popup-action-btn:hover::after {
+  left: 100%;
+}
+
+.popup-field-error {
+  color: #ef4444;
+  font-size: 0.8rem;
+  margin-top: 5px;
+  display: none;
+  padding-left: 5px;
+}
+
+.popup-field-group.error .popup-field-error {
+  display: block;
+}
+
+.popup-field-group.error .popup-field-input,
+.popup-field-group.error .popup-field-textarea {
+  border-color: #ef4444;
+  background-color: #fef2f2;
 }
 
 .blog-layout {
@@ -1842,10 +2041,6 @@ ul {
   font-weight: 500;
   color: #2c3e50;
 }
-
-/* ============================================== */
-/* RESPONSIVE MEDIA QUERIES - ALL IN ONE PLACE */
-/* ============================================== */
 
 /* Desktop Menu - Navigation */
 @media only screen and (min-width: 768px) {
@@ -1943,86 +2138,65 @@ ul {
 
 /* POPUP RESPONSIVE STYLES */
 @media (max-width: 768px) {
-  .pop-up-box {
+  .popup-modal {
     width: 90%;
-    height: 400px;
+    height: 70vh;
     max-width: 500px;
     border-radius: 12px;
   }
 
-  .discount-strip {
-    padding: 6px 15px;
-    min-height: 45px;
+  .popup-form-content {
+    padding: 20px;
   }
 
-  .marquee-text {
-    font-size: 13px;
-    padding: 0 1.5rem;
+  .popup-title {
+    font-size: 1rem;
   }
 
-  .marquee-container {
-    height: 35px;
+  .popup-subtitle {
+    font-size: 0.9rem;
   }
 
-  .card-content {
-    height: calc(100% - 90px);
+  .popup-form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 
-  .pop-up-box .clos-pop-up {
+  .popup-field-input,
+  .popup-field-textarea {
+    padding: 10px;
+    font-size: 0.8rem;
+  }
+
+  .popup-action-btn {
+    padding: 14px 20px;
+    font-size: 0.9rem;
+  }
+
+  .popup-close-btn {
     width: 35px;
     height: 35px;
     top: 12px;
     right: 12px;
     font-size: 16px;
   }
+
+  .popup-discount-strip {
+    min-height: 45px;
+  }
+
+  .popup-marquee-text {
+    font-size: 13px;
+    padding: 0 1.5rem;
+  }
+
+  .popup-marquee-container {
+    height: 35px;
+  }
 }
 
 @media (max-width: 480px) {
-  .pop-up-box {
-    width: 95%;
-    height: 350px;
-    border-radius: 10px;
-    margin: 0 auto;
-  }
-
-  .discount-strip {
-    padding: 5px 10px;
-    min-height: 40px;
-  }
-
-  .strip-content {
-    gap: 8px;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .marquee-text {
-    font-size: 11px;
-    padding: 0 1rem;
-  }
-
-  .marquee-container {
-    height: 30px;
-    width: 100%;
-  }
-
-  .card-content {
-    height: calc(100% - 80px);
-  }
-
-  .card-content img {
-    padding: 5px;
-    object-fit: contain;
-  }
-
-  .pop-up-box .clos-pop-up {
-    width: 32px;
-    height: 32px;
-    top: 8px;
-    right: 8px;
-    font-size: 14px;
-  }
-
   .contact-form-input,
   .contact-form-textarea {
     padding: 1.25rem 1rem 0.5rem 1rem;
@@ -2250,56 +2424,9 @@ ul {
 }
 
 @media (max-width: 360px) {
-  .pop-up-box {
-    width: 98%;
-    height: 300px;
-    border-radius: 8px;
-  }
-
-  .discount-strip {
-    padding: 4px 8px;
-    min-height: 35px;
-  }
-
-  .marquee-text {
-    font-size: 10px;
-    padding: 0 0.75rem;
-  }
-
-  .marquee-container {
-    height: 25px;
-  }
-  .card-content {
-    height: calc(100% - 70px);
-  }
-
-  .pop-up-box .clos-pop-up {
-    width: 28px;
-    height: 28px;
-    top: 6px;
-    right: 6px;
-    font-size: 12px;
-  }
 }
 
 @media (max-height: 500px) and (orientation: landscape) {
-  .fullscreen-pop-up {
-    overflow-y: auto;
-    padding: 10px 0;
-  }
-
-  .pop-up-box {
-    position: relative;
-    top: auto;
-    left: auto;
-    transform: scale(1);
-    margin: 20px auto;
-    height: 90vh;
-    max-height: 300px;
-    width: 90%;
-    animation: none;
-  }
-
   .card-content {
     height: calc(100% - 80px);
   }
