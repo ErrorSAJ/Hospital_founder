@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from website.models import Service, CaseStudy, Doctor, Testimonial, ContactRequest
+from website.models import *
 
 def index(request):
 
@@ -20,6 +20,7 @@ def index(request):
         "case_studies": CaseStudy.objects.filter(is_active=True),
         "doctors": Doctor.objects.filter(is_active=True),
         "testimonials": Testimonial.objects.filter(is_active=True),
+        "clients" : ClientHospitals.objects.filter(is_active=True),
     }
     return render(request, "index.html", context)
 

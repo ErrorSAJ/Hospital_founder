@@ -122,3 +122,15 @@ class ContactRequest(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.phone}"
+    
+
+# ------------------------
+# 7. Clients SECTION    
+class ClientHospitals(models.Model):
+    name = models.CharField(max_length=255,default="",blank=True, null=True)
+    img = models.ImageField(upload_to="clients/", blank=True, null=True)  
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True) 
+
+    def __str__(self):
+        return self.name if self.name else "unknown"
